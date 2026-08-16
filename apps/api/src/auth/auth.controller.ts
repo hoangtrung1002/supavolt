@@ -10,15 +10,15 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { ConfigService } from '@nestjs/config';
-import { RegisterDto } from './dto/register.dto';
 import type { Request, Response } from 'express';
-import { LoginDto } from './dto/login.dto';
+import { ConfigService } from '@nestjs/config';
 import { COOKIE_KEYS } from '@supavolt/constants';
-import { JwtAuthGuard } from './jwt-auth.guard';
 import type { JwtPayload } from '@supavolt/types';
-import { CurrentUser } from './current-user.decorator';
+import { AuthService } from './auth.service';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { CurrentUser } from './decorators/current-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -45,7 +45,6 @@ export class AuthController {
   ) {
     const tokens = await this.authService.login(dto);
     this.authService.setTokenCookies(res, tokens);
-
     return { message: 'Logged in successfully' };
   }
 
@@ -76,8 +75,8 @@ export class AuthController {
 
   @Get('google')
   @Redirect()
-  googleLogIn() {
-    return { url: this.authService.getGithubAuthUrl() };
+  googleLogin() {
+    return { url: this.authService.getGoogleAuthUrl() };
   }
 
   @Get('google/callback')
