@@ -4,9 +4,15 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './db/drizzle.module';
 import { AuthModule } from './auth/auth.module';
+import { OrgModule } from './orgs/org.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), DbModule, AuthModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    DbModule,
+    AuthModule,
+    OrgModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
