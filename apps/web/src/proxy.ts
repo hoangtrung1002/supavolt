@@ -1,8 +1,8 @@
-import { COOKIE_KEYS } from "@supavolt/constants";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { COOKIE_KEYS } from "@supavolt/constants";
 import * as jose from "jose";
-import { applyAuthCookiesToResponse } from "./features/auth/cookies";
+import { applyAuthCookiesToResponse } from "@/features/auth/cookies";
 
 const AUTH_ROUTES = ["/login", "/register"];
 
@@ -43,9 +43,11 @@ export async function proxy(request: NextRequest) {
       // token is expired or invalid: invalid remains false
     }
   }
+
   if (isAuthRoute && isValid) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
+
   if (isAuthRoute && refreshToken) {
     const response = NextResponse.redirect(new URL("/dashboard", request.url));
     if (await refreshSession(refreshToken, response)) {
@@ -61,8 +63,10 @@ export async function proxy(request: NextRequest) {
     }
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
   return NextResponse.next();
 }
+
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
