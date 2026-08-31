@@ -66,3 +66,23 @@ export interface OrganizationWithMeta extends Organization {
   projectCount: number;
   role: OrgRole;
 }
+
+export interface OrgMemberWithUser {
+  id: string;
+  role: OrgRole;
+  createdAt: Date;
+  user: {
+    id: string;
+    name: string | null;
+    email: string;
+    avatarUrl: string | null;
+  };
+}
+
+export interface InviteMemberInput {
+  email: string;
+}
+
+export interface UpdateRoleInput {
+  role: OrgRole;
+}
