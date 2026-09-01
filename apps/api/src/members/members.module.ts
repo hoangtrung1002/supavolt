@@ -10,4 +10,4 @@ import { MembersController } from './members.controller';
   controllers: [MembersController],
   exports: [InviteService],
 })
-export class MemberModule {}
+export class MembersModule {}

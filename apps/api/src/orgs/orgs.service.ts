@@ -7,7 +7,7 @@ import { organizations, orgMembers, projects } from 'src/db/schema';
 import { CreateOrgDto } from './dto/create-org.dto';
 
 @Injectable()
-export class OrgService {
+export class OrgsService {
   constructor(private drizzle: DrizzleService) {}
 
   private generateOrgSlug(name: string): string {

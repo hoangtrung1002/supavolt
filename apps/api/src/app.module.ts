@@ -4,16 +4,18 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './db/drizzle.module';
 import { AuthModule } from './auth/auth.module';
-import { OrgModule } from './orgs/org.module';
-import { MemberModule } from './members/members.module';
+import { OrgsModule } from './orgs/orgs.module';
+import { MembersModule } from './members/members.module';
+import { ProductsModule } from './projects/products.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DbModule,
     AuthModule,
-    OrgModule,
-    MemberModule,
+    OrgsModule,
+    MembersModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
