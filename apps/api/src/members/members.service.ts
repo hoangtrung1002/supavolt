@@ -16,7 +16,7 @@ export class MembersService {
     return this.drizzle.db
       .select({
         id: orgMembers.id,
-        roleL: orgMembers.role,
+        role: orgMembers.role,
         createdAt: orgMembers.createdAt,
         user: {
           id: users.id,
@@ -39,7 +39,7 @@ export class MembersService {
     const [updated] = await this.drizzle.db
       .update(orgMembers)
       .set({ role: dto.role })
-      .where(eq(orgMembers.id, users.id))
+      .where(eq(orgMembers.id, memberId))
       .returning();
     if (!updated) throw new NotFoundException('Member not found');
     return updated;

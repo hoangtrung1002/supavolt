@@ -67,7 +67,7 @@ export class InviteService {
     const inviteUrl = `${this.configService.get<string>('API_URL')}/auth/invite/accept?token=${token}`;
     // send the email via Resend
     await this.resend.emails.send({
-      from: 'Supavolt <noreply@yourdomain.com',
+      from: 'onboarding@resend.dev',
       to: email,
       subject: `You've been invited to join ${org.name} on Supavolt`,
       html: `
