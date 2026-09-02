@@ -1,8 +1,7 @@
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { retrieveTokenFromCookie } from "@/server-utils/utils";
-import { retrieveMyOrganizationsFromApi } from "@/features/organization/organization-helpers.sever";
-import { TopNav } from "@/components/top-nav";
 import { AppSidebar } from "@/components/app-sidbar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { retrieveMyOrganizationsFromApi } from "@/features/organization/organization-helpers.sever";
+import { retrieveTokenFromCookie } from "@/server-utils/utils";
 
 async function getCurrentUser() {
   const token = await retrieveTokenFromCookie();
@@ -25,10 +24,7 @@ export default async function DashboardLayout({
   return (
     <SidebarProvider>
       <AppSidebar orgs={orgs} user={user} />
-      <SidebarInset>
-        <TopNav />
-        <main className="flex-1 overflow-y-auto p-6">{children}</main>
-      </SidebarInset>
+      <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );
 }
